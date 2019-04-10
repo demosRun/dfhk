@@ -38,7 +38,7 @@
     .color-bar
     .big-image-box
       .img-box
-        img(src="@&test.jpg&", @name="bigImage")
+        img(@name="bigImage")
       .big-image-swiper-container-box
         .big-image-swiper-container
           .swiper-wrapper
@@ -65,13 +65,14 @@
     .color-bar
     iframe(frameborder="0", scrolling="no", src="http://t.people.com.cn/openLiveShow.action?ie=utf-8&ptopic=%25E4%25B8%2589%25E5%2586%259C&stopic=%25E4%25B8%2589%25E5%2586%259C&width=1000&height=600&nickNames=&gid=0&roll=0&interval=3000&appkey=9450803942&input=1&vip=0&moderated=1&title=1&liveCode=jzfpgxx&isMLive=0")
     // 版权信息
-    temple(name="copyright" src="./src/page/096ec4bab995b68ca736d86b3d3aec7c.page")
+    temple(name="copyright" src="https://going.run/9bd1b79a88dd0b45112f7a9d39068849.page")
 </template>
 
 <script>
   module.exports = {
     data: {
       swiper: null,
+      activeImageId: 0,
       hrefList: [
         {href: "#", name: "四川巴州区检察院：启动法治进校园”活动"},
         {href: "#", name: "四川巴州区检察院：启动法治进校园”活动"},
@@ -99,7 +100,7 @@
         {src:"@&test.jpg&"},
         {src:"@&test.jpg&"},
         {src:"@&test.jpg&"},
-        {src:"@&test.jpg&"},
+        {src:"@&ad.png&"},
         {src:"@&test.jpg&"},
       ],
       textSwiper: [
@@ -115,15 +116,46 @@
         pagination: '.pagination',
         paginationClickable: true
       })
+      // 自动识别大图图片
+      this.data.bigImage
+      // $dom('bigImage').src = 
       // 高清大图区域
       this.data.swiper = new Swiper('.big-image-swiper-container',{
         paginationClickable: true,
         slidesPerView: 5,
-        onSlideClick: function(swiper) {
+        onSlideClick: (swiper) => {
+          console.log(swiper.clickedSlideIndex)
+          this.data.activeImageId = swiper.clickedSlideIndex
+          this.clearShow()
+          swiper.slides[this.data.activeImageId].classList.add('show')
           // 变更大图图片
-          $dom('bigImage').src = swiper.clickedSlide.children[0].children[0].src
+          $dom('bigImage').src = swiper.clickedSlide.getElementsByTagName('img')[0].src
+        },
+        onSlideChangeEnd: (swiper) => {
+          console.log(this.data.activeImageId, swiper.activeIndex)
+          // 判断活跃的主图是否已经不在轮播图可选择图片内
+          if (this.data.activeImageId < swiper.activeIndex) {
+            this.data.activeImageId = swiper.activeIndex
+            this.clearShow()
+            swiper.slides[this.data.activeImageId].classList.add('show')
+            $dom('bigImage').src = swiper.slides[this.data.activeImageId].getElementsByTagName('img')[0].src
+          }
+          if (this.data.activeImageId > swiper.activeIndex + 4) {
+            this.data.activeImageId = swiper.activeIndex + 4
+            this.clearShow()
+            swiper.slides[this.data.activeImageId].classList.add('show')
+            $dom('bigImage').src = swiper.slides[this.data.activeImageId].getElementsByTagName('img')[0].src
+          }
+          // 变更大图图片
+          // $dom('bigImage').src = swiper.clickedSlide.children[0].children[0].src
         }
       })
+      // 默认显示第一张图片
+      $dom('bigImage').src = this.data.swiper.slides[0].getElementsByTagName('img')[0].src
+      setTimeout(() => {
+        this.data.swiper.slides[0].classList.add('show')
+      }, 0)
+      
       // 文字的
       new Swiper('.text-swiper-container',{
         pagination: '.text-swiper-pagination',
@@ -132,6 +164,11 @@
           // 滑动的话换主图
           $dom('showTextImg').src = swiper.activeSlide().attributes.src.nodeValue
         }
+      })
+    },
+    clearShow: function () {
+      this.data.swiper.slides.forEach(element => {
+        element.classList.remove('show')
       })
     },
     swiperNext: function () {
@@ -316,6 +353,10 @@
   .big-image-swiper-container {
     width: 960px;
     margin: 0 auto;
+    .show img{
+      border: 1px solid #440fe6;
+      box-sizing: border-box;
+    }
   }
   .swiper-slide .slide-img-box {
     cursor: pointer;
