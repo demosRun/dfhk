@@ -50,11 +50,11 @@
     // 图片展示区域
     .img-text-show-box
       .left.float-left
-        img(src="@&test.jpg&")
+        img(src="@&test.jpg&", @name="showTextImg")
       .text-swiper-box.float-left
         .text-swiper-container
           .swiper-wrapper
-            .swiper-slide(@for="item in textSwiper")
+            .swiper-slide(@for="item in textSwiper", src="{{item.src}}")
               .title {{item.title}}
               .text {{item.text}}
         .text-swiper-pagination
@@ -64,6 +64,8 @@
     .title-bar 微博滚动
     .color-bar
     iframe(frameborder="0", scrolling="no", src="http://t.people.com.cn/openLiveShow.action?ie=utf-8&ptopic=%25E4%25B8%2589%25E5%2586%259C&stopic=%25E4%25B8%2589%25E5%2586%259C&width=1000&height=600&nickNames=&gid=0&roll=0&interval=3000&appkey=9450803942&input=1&vip=0&moderated=1&title=1&liveCode=jzfpgxx&isMLive=0")
+    // 版权信息
+    temple(name="copyright" src="./src/page/096ec4bab995b68ca736d86b3d3aec7c.page")
 </template>
 
 <script>
@@ -101,10 +103,10 @@
         {src:"@&test.jpg&"},
       ],
       textSwiper: [
-        {title: "2017北京时装周盛大启幕 掀全民时尚文化热潮", text: "2017北京时装周22日晚在太庙盛大启幕。时装周持续至28日，在太庙、中国国家博物馆、中华世纪坛、凤凰中心等多个时尚文化地标举行，将在北京掀起全民时尚文化热潮。作为本届时装周开幕大秀的新中国第一个羊绒服饰品牌雪莲，以“旅行”为主题，为2017北京时装周奏响第一支时尚旋律。"},
-        {title: "2017北京时装周盛大启幕 掀全民时尚文化热潮", text: "2017北京时装周22日晚在太庙盛大启幕。时装周持续至28日，在太庙、中国国家博物馆、中华世纪坛、凤凰中心等多个时尚文化地标举行，将在北京掀起全民时尚文化热潮。作为本届时装周开幕大秀的新中国第一个羊绒服饰品牌雪莲，以“旅行”为主题，为2017北京时装周奏响第一支时尚旋律。"},
-        {title: "2017北京时装周盛大启幕 掀全民时尚文化热潮", text: "2017北京时装周22日晚在太庙盛大启幕。时装周持续至28日，在太庙、中国国家博物馆、中华世纪坛、凤凰中心等多个时尚文化地标举行，将在北京掀起全民时尚文化热潮。作为本届时装周开幕大秀的新中国第一个羊绒服饰品牌雪莲，以“旅行”为主题，为2017北京时装周奏响第一支时尚旋律。"},
-        {title: "2017北京时装周盛大启幕 掀全民时尚文化热潮", text: "2017北京时装周22日晚在太庙盛大启幕。时装周持续至28日，在太庙、中国国家博物馆、中华世纪坛、凤凰中心等多个时尚文化地标举行，将在北京掀起全民时尚文化热潮。作为本届时装周开幕大秀的新中国第一个羊绒服饰品牌雪莲，以“旅行”为主题，为2017北京时装周奏响第一支时尚旋律。"},
+        {title: "2017北京时装周盛大启幕 掀全民时尚文化热潮", src:"@&test.jpg&", text: "2017北京时装周22日晚在太庙盛大启幕。时装周持续至28日，在太庙、中国国家博物馆、中华世纪坛、凤凰中心等多个时尚文化地标举行，将在北京掀起全民时尚文化热潮。作为本届时装周开幕大秀的新中国第一个羊绒服饰品牌雪莲，以“旅行”为主题，为2017北京时装周奏响第一支时尚旋律。"},
+        {title: "2017北京时装周盛大启幕 掀全民时尚文化热潮", src:"@&ad.png&", text: "2017北京时装周22日晚在太庙盛大启幕。时装周持续至28日，在太庙、中国国家博物馆、中华世纪坛、凤凰中心等多个时尚文化地标举行，将在北京掀起全民时尚文化热潮。作为本届时装周开幕大秀的新中国第一个羊绒服饰品牌雪莲，以“旅行”为主题，为2017北京时装周奏响第一支时尚旋律。"},
+        {title: "2017北京时装周盛大启幕 掀全民时尚文化热潮", src:"@&test.jpg&", text: "2017北京时装周22日晚在太庙盛大启幕。时装周持续至28日，在太庙、中国国家博物馆、中华世纪坛、凤凰中心等多个时尚文化地标举行，将在北京掀起全民时尚文化热潮。作为本届时装周开幕大秀的新中国第一个羊绒服饰品牌雪莲，以“旅行”为主题，为2017北京时装周奏响第一支时尚旋律。"},
+        {title: "2017北京时装周盛大启幕 掀全民时尚文化热潮", src:"@&test.jpg&", text: "2017北京时装周22日晚在太庙盛大启幕。时装周持续至28日，在太庙、中国国家博物馆、中华世纪坛、凤凰中心等多个时尚文化地标举行，将在北京掀起全民时尚文化热潮。作为本届时装周开幕大秀的新中国第一个羊绒服饰品牌雪莲，以“旅行”为主题，为2017北京时装周奏响第一支时尚旋律。"},
       ]
     },
     created: function () {
@@ -125,7 +127,11 @@
       // 文字的
       new Swiper('.text-swiper-container',{
         pagination: '.text-swiper-pagination',
-        paginationClickable: true
+        paginationClickable: true,
+        onSlideChangeEnd: function (swiper) {
+          // 滑动的话换主图
+          $dom('showTextImg').src = swiper.activeSlide().attributes.src.nodeValue
+        }
       })
     },
     swiperNext: function () {
