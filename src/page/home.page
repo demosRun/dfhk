@@ -1,0 +1,394 @@
+<template lang="pug">
+.main-box
+  // 主要内容区域
+  .content
+    // 通栏广告区，可以插入图片视频
+    .ad-box
+      img(src="@&ad.png&")
+      // 有视频的话用下面这个
+      // video(src="http://cunchu.site/ozzx/resource/movie.ogg", autoplay="autoplay") 你的浏览器不支持video播放,请升级!
+    // 轮播展示区域
+    .swiper-box
+      .left.float-left
+        .title 三月扬州 “大厨”精烹法治课间餐
+        .text 3月15日,烟花烂漫,草长莺飞,扬州市竹西中学内更是一片春意浓浓。由最高人民检察院、教育部联合组织的“法治进校园”全国巡讲团,在这里为500名学生“烹调”了一场别具风味的“法治课间餐”,江苏省、扬州市、区县三级检察院,以及扬州市教育局负责人出席。
+        ul.li-list
+          li(@for="item in hrefList")
+            a(href="{{item.href}}") {{item.name}}
+      .right.float-left.swiper-container
+        .swiper-wrapper
+          .swiper-slide(@for="item in swiperBoxList")
+            img(src="{{item.src}}")
+            .text {{item.text}}
+        .pagination
+      .clear
+    // 视频报道区域
+    .title-bar 视频报道
+    .color-bar
+    .video-box
+      .left.float-left
+        video(src="http://cunchu.site/ozzx/resource/movie.ogg", controls="controls", @name="videoPlayer") 你的浏览器不支持video播放,请升级!
+      .right.float-left
+        .video-item(@for="item in videoList", @click="changeVideoSrc('{{item.videoUrl}}')")
+          img(src="{{item.src}}")
+          .text {{item.text}}
+      .clear
+    // 高清大图区域
+    .title-bar 高清大图
+    .color-bar
+    .big-image-box
+      .img-box
+        img(src="@&test.jpg&", @name="bigImage")
+      .big-image-swiper-container-box
+        .big-image-swiper-container
+          .swiper-wrapper
+            .swiper-slide(@for="item in bigImageSwiper")
+              .slide-img-box
+                img(src="{{item.src}}")
+        img.prev-button.swiper-button(src="@&left.png&", @click="swiperPrev")
+        img.next-button.swiper-button(src="@&left.png&", @click="swiperNext")
+    // 图片展示区域
+    .img-text-show-box
+      .left.float-left
+        img(src="@&test.jpg&")
+      .text-swiper-box.float-left
+        .text-swiper-container
+          .swiper-wrapper
+            .swiper-slide(@for="item in textSwiper")
+              .title {{item.title}}
+              .text {{item.text}}
+        .text-swiper-pagination
+      .clear
+    temple(name="logoBox" src="./src/page/logoBox.page")
+    // 微博滚动区域
+    .title-bar 微博滚动
+    .color-bar
+    iframe(frameborder="0", scrolling="no", src="http://t.people.com.cn/openLiveShow.action?ie=utf-8&ptopic=%25E4%25B8%2589%25E5%2586%259C&stopic=%25E4%25B8%2589%25E5%2586%259C&width=1000&height=600&nickNames=&gid=0&roll=0&interval=3000&appkey=9450803942&input=1&vip=0&moderated=1&title=1&liveCode=jzfpgxx&isMLive=0")
+</template>
+
+<script>
+  module.exports = {
+    data: {
+      swiper: null,
+      hrefList: [
+        {href: "#", name: "四川巴州区检察院：启动法治进校园”活动"},
+        {href: "#", name: "四川巴州区检察院：启动法治进校园”活动"},
+        {href: "#", name: "四川巴州区检察院：启动法治进校园”活动"},
+        {href: "#", name: "四川巴州区检察院：启动法治进校园”活动"}
+      ],
+      swiperBoxList: [
+        {src:"@&test.jpg&", text: "全省“法治进校园”巡讲团首站——晋中"},
+        {src:"@&test.jpg&", text: "全省“法治进校园”巡讲团首站——晋中"},
+        {src:"@&test.jpg&", text: "全省“法治进校园”巡讲团首站——晋中"},
+      ],
+      videoList: [
+        {src:"@&test.jpg&", text: "东方航空“人民网号”首航", videoUrl: "http://cunchu.site/ozzx/resource/movie.ogg"},
+        {src:"@&test.jpg&", text: "东方航空“人民网号”首航", videoUrl: "http://cunchu.site/ozzx/resource/movie.ogg"},
+        {src:"@&test.jpg&", text: "东方航空“人民网号”首航", videoUrl: "http://cunchu.site/ozzx/resource/movie.ogg"},
+        {src:"@&test.jpg&", text: "东方航空“人民网号”首航", videoUrl: "http://cunchu.site/ozzx/resource/movie.ogg"},
+        {src:"@&test.jpg&", text: "东方航空“人民网号”首航", videoUrl: "http://cunchu.site/ozzx/resource/movie.ogg"},
+        {src:"@&test.jpg&", text: "东方航空“人民网号”首航", videoUrl: "http://cunchu.site/ozzx/resource/movie.ogg"},
+      ],
+      // 框架循环数组有问题
+      bigImageSwiper: [
+        {src:"@&test.jpg&"},
+        {src:"@&ad.png&"},
+        {src:"@&test.jpg&"},
+        {src:"@&test.jpg&"},
+        {src:"@&test.jpg&"},
+        {src:"@&test.jpg&"},
+        {src:"@&test.jpg&"},
+        {src:"@&test.jpg&"},
+      ],
+      textSwiper: [
+        {title: "2017北京时装周盛大启幕 掀全民时尚文化热潮", text: "2017北京时装周22日晚在太庙盛大启幕。时装周持续至28日，在太庙、中国国家博物馆、中华世纪坛、凤凰中心等多个时尚文化地标举行，将在北京掀起全民时尚文化热潮。作为本届时装周开幕大秀的新中国第一个羊绒服饰品牌雪莲，以“旅行”为主题，为2017北京时装周奏响第一支时尚旋律。"},
+        {title: "2017北京时装周盛大启幕 掀全民时尚文化热潮", text: "2017北京时装周22日晚在太庙盛大启幕。时装周持续至28日，在太庙、中国国家博物馆、中华世纪坛、凤凰中心等多个时尚文化地标举行，将在北京掀起全民时尚文化热潮。作为本届时装周开幕大秀的新中国第一个羊绒服饰品牌雪莲，以“旅行”为主题，为2017北京时装周奏响第一支时尚旋律。"},
+        {title: "2017北京时装周盛大启幕 掀全民时尚文化热潮", text: "2017北京时装周22日晚在太庙盛大启幕。时装周持续至28日，在太庙、中国国家博物馆、中华世纪坛、凤凰中心等多个时尚文化地标举行，将在北京掀起全民时尚文化热潮。作为本届时装周开幕大秀的新中国第一个羊绒服饰品牌雪莲，以“旅行”为主题，为2017北京时装周奏响第一支时尚旋律。"},
+        {title: "2017北京时装周盛大启幕 掀全民时尚文化热潮", text: "2017北京时装周22日晚在太庙盛大启幕。时装周持续至28日，在太庙、中国国家博物馆、中华世纪坛、凤凰中心等多个时尚文化地标举行，将在北京掀起全民时尚文化热潮。作为本届时装周开幕大秀的新中国第一个羊绒服饰品牌雪莲，以“旅行”为主题，为2017北京时装周奏响第一支时尚旋律。"},
+      ]
+    },
+    created: function () {
+      // 轮播图展示区域swiper
+      new Swiper('.swiper-container',{
+        pagination: '.pagination',
+        paginationClickable: true
+      })
+      // 高清大图区域
+      this.data.swiper = new Swiper('.big-image-swiper-container',{
+        paginationClickable: true,
+        slidesPerView: 5,
+        onSlideClick: function(swiper) {
+          // 变更大图图片
+          $dom('bigImage').src = swiper.clickedSlide.children[0].children[0].src
+        }
+      })
+      // 文字的
+      new Swiper('.text-swiper-container',{
+        pagination: '.text-swiper-pagination',
+        paginationClickable: true
+      })
+    },
+    swiperNext: function () {
+      // console.log('swiperNext')
+      this.data.swiper.swipeNext()
+    },
+    swiperPrev: function () {
+      // console.log('swiperPrev')
+      this.data.swiper.swipePrev()
+    },
+    changeVideoSrc: function (src) {
+      console.log(src)
+      $dom('videoPlayer').src = src
+    }
+  }
+</script>
+
+
+<style lang="less">
+.main-box {
+  width: 100%;
+  background-image: url('@&bg.png&');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.content {
+  width: 1000px;
+  top: 400px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  img {
+    width: 100%;
+  }
+}
+.ad-box {
+  position: relative;
+  margin: 20px 0;
+  video {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+  }
+}
+// 轮播图展示区域
+.swiper-box {
+  height: 320px;
+  width: 100%;
+  overflow: hidden;
+  .li-list {
+    height: 100px;
+    overflow: auto;
+  }
+  .left {
+    float: left;
+    width: 40%;
+    margin-right: 5%;
+    .text {
+      color: #898989;
+      font-size: 15px;
+      line-height: 25px;
+      height: 160px;
+      overflow: hidden;
+    }
+  }
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 48px;
+  }
+  img {
+    height: 100%;
+  }
+  .swiper-wrapper .text {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    line-height: 30px;
+    padding: 0 10px;
+    width: 530px;
+  }
+  ul {
+    padding-left: 20px;
+    line-height: 25px;
+  }
+  .right {
+    width: 55%;
+    height: 320px;
+    margin: 0;
+  }
+  .pagination {
+    position: absolute;
+    bottom: 5px;
+    height: 20px;
+    right: 5px;
+  }
+}
+
+.swiper-pagination-switch {
+  width: 10px;
+  height: 10px;
+  display: block;
+  float: left;
+  margin: 3px;
+  border-radius: 50%;
+  background-color: white;
+  position: relative;
+}
+.swiper-active-switch {
+  background-color: blue;
+}
+
+// 标题条
+.title-bar {
+  font-size: 41px;
+  color: #1e4e9f;
+  line-height: 70px;
+  font-weight: bold;
+}
+// 颜色条
+.color-bar {
+  height: 14px;
+  background: linear-gradient(to right, #206fb9, #d0e3f2);
+  margin-bottom: 40px;
+}
+
+// 视频报道区域
+.video-box {
+  .left {
+    width: 55%;
+    float: left;
+  }
+  video {
+    width: 100%;
+  }
+  .right {
+    width: 45%;
+    position: relative;
+  }
+  .video-item {
+    width: 45%;
+    margin-left: 5%;
+    height: 150px;
+    float: left;
+    cursor: pointer;
+    .text {
+      color: #595757;
+      font-size: 14px;
+      text-align: center;
+      font-weight: bold;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+// 高清大图
+.big-image-box {
+  margin-bottom: 40px;
+  .img-box {
+    width: 100%;
+    height: 600px;
+    position: relative;
+    .img {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+  }
+  .big-image-swiper-container, .big-image-swiper-wrapper, .big-image-swiper-container-box {
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+  }
+  .big-image-swiper-container {
+    width: 960px;
+    margin: 0 auto;
+  }
+  .swiper-slide .slide-img-box {
+    cursor: pointer;
+    margin: 0 10px;
+  }
+  .slide-img-box, .slide-img-box img {
+    height: 100%;
+  }
+  .swiper-button {
+    position: absolute;
+    width: 25px;
+    height: 36px;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  .prev-button {
+    left: 0;
+  }
+  .next-button {
+    right: 0;
+    transform: rotate(180deg);
+  }
+}
+.img-text-show-box {
+  background-color: #eeeeee;
+  height: 430px;
+  .left {
+    width: 50%;
+    height: 100%;
+    position: relative;
+  }
+  img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  .text-swiper-box {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .text-swiper-pagination {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    margin: auto;
+    .swiper-active-switch {
+      background-color: blue;
+    }
+  }
+  .title {
+    font-size: 19px;
+    color: #3e3a39;
+    line-height: 80px;
+    font-weight: bold;
+  }
+  .text {
+    color: #727171;
+    line-height: 28px;
+    font-size: 16px;
+    height: 240px;
+    overflow: hidden;
+  }
+  .text-swiper-container {
+    margin: 40px;
+    overflow: hidden;
+  }
+  .swiper-pagination-switch {
+    background-color: #898989;
+  }
+  
+}
+iframe {
+  width: 100%;
+  height: 600px;
+}
+</style>
