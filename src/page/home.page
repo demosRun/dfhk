@@ -8,31 +8,11 @@
       // 有视频的话用下面这个
       // video(src="http://www.people.com.cn/", autoplay="autoplay") 你的浏览器不支持video播放,请升级!
     // 轮播展示区域
-    .swiper-box
-      .left.float-left
-        .title 三月扬州 “大厨”精烹法治课间餐
-        .text 3月15日,烟花烂漫,草长莺飞,扬州市竹西中学内更是一片春意浓浓。由最高人民检察院、教育部联合组织的“法治进校园”全国巡讲团,在这里为500名学生“烹调”了一场别具风味的“法治课间餐”,江苏省、扬州市、区县三级检察院,以及扬州市教育局负责人出席。
-        ul.li-list
-          li(@for="item in hrefList")
-            a(href="{{item.href}}") {{item.name}}
-      .right.float-left.swiper-container
-        .swiper-wrapper
-          .swiper-slide(@for="item in swiperBoxList")
-            img(src="{{item.src}}")
-            .text {{item.text}}
-        .pagination
-      .clear
+    temple(name="swiperBox" src="https://going.run/0b0888f933687b83a9dc293a8d5c5106.page")
     // 视频报道区域
     .title-bar 视频报道
     .color-bar
-    .video-box
-      .left.float-left
-        embed(src="http://tvplayer.people.com.cn/player.php/xml/L3B2c2VydmljZS94bWwvMjAxOC85LzMwLzk5MDAxZGE4LTQxMjctNGU3Ni1iMDQ4LTIyMDczZDQ4M2ZmZC54bWw==/autoplay/0//playerByOsmf.swf", quality="high", width="540", height="415", align="middle", allowScriptAccess="always", allowFullScreen="true", type="application/x-shockwave-flash", name="ptvplayer", id="ptvplayer")
-      .right.float-left
-        a.video-item(@for="item in videoList", href="{{item.url}}", target="view_frame")
-          img(src="{{item.src}}")
-          .text {{item.text}}
-      .clear
+    temple(name="videoBox" src="./src/page/video.page")
     // 高清大图区域
     .title-bar 高清大图
     .color-bar
@@ -59,7 +39,7 @@
               .text {{item.text}}
         .text-swiper-pagination
       .clear
-    temple(name="logoBox" src="./src/page/logoBox.page")
+    temple(name="logoBox" src="https://going.run/a00af7f9de6201861383bda5c78eac6c.page")
     // 微博滚动区域
     .title-bar 微博滚动
     .color-bar
@@ -78,11 +58,6 @@
         {href: "#", name: "四川巴州区检察院：启动法治进校园”活动"},
         {href: "#", name: "四川巴州区检察院：启动法治进校园”活动"},
         {href: "#", name: "四川巴州区检察院：启动法治进校园”活动"}
-      ],
-      swiperBoxList: [
-        {src:"@&test.jpg&", text: "全省“法治进校园”巡讲团首站——晋中"},
-        {src:"@&test.jpg&", text: "全省“法治进校园”巡讲团首站——晋中"},
-        {src:"@&test.jpg&", text: "全省“法治进校园”巡讲团首站——晋中"},
       ],
       videoList: [
         {src:"@&test.jpg&", text: "东方航空“人民网号”首航", url: "http://www.people.com.cn/"},
@@ -119,11 +94,6 @@
       ]
     },
     created: function () {
-      // 轮播图展示区域swiper
-      new Swiper('.swiper-container',{
-        pagination: '.pagination',
-        paginationClickable: true
-      })
       // 自动识别大图图片
       this.data.bigImage
       // $dom('bigImage').src = 
@@ -219,61 +189,6 @@
     left: 0;
     width: 100%;
     background-color: white;
-  }
-}
-// 轮播图展示区域
-.swiper-box {
-  height: 320px;
-  width: 100%;
-  overflow: hidden;
-  .li-list {
-    height: 100px;
-    overflow: auto;
-  }
-  .left {
-    float: left;
-    width: 40%;
-    margin-right: 5%;
-    .text {
-      color: #898989;
-      font-size: 15px;
-      line-height: 25px;
-      height: 160px;
-      overflow: hidden;
-    }
-  }
-  .title {
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 48px;
-  }
-  img {
-    height: 100%;
-  }
-  .swiper-wrapper .text {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    line-height: 30px;
-    padding: 0 10px;
-    width: 530px;
-  }
-  ul {
-    padding-left: 20px;
-    line-height: 25px;
-  }
-  .right {
-    width: 55%;
-    height: 320px;
-    margin: 0;
-  }
-  .pagination {
-    position: absolute;
-    bottom: 5px;
-    height: 20px;
-    right: 5px;
   }
 }
 
