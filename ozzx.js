@@ -17,19 +17,11 @@ module.exports = {
     },
     {
       name: 'viewport',
-      content: 'initial-scale=1,user-scalable=no,maximum-scale=1',
+      content: 'width=1200, maximum-scale=0.1',
     }
   ],
   // 使用到的外部脚本清单
   scriptList: [
-    {
-      name: "gif",
-      src: "./src/script/log.js",
-      // 是否使用babel处理
-      babel: true,
-      // 是否异步加载此脚本,请确保此脚本不会对DOM进行操作
-      defer: true
-    },
     {
       name: "swiper2.0",
       src: "http://tools.people.com.cn/libs/swiper/2.0/idangerous.swiper.min.js"
